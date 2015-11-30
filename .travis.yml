@@ -14,6 +14,8 @@ env:
 - CLICK_VERSION=6.0
 - CLICK_VERSION=5.1
 - CLICK_VERSION=5.0
+- CLICK_VERSION=4.1
+- CLICK_VERSION=4.0
 install:
 - pip install click==$CLICK_VERSION
 - pip install -e .
