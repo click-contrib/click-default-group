@@ -8,7 +8,14 @@ python:
 - 3.5-dev
 - pypy
 - pypy3
+env:
+- CLICK_VERSION=6.2
+- CLICK_VERSION=6.1
+- CLICK_VERSION=6.0
+- CLICK_VERSION=5.1
+- CLICK_VERSION=5.0
 install:
+- pip install click==$CLICK_VERSION
 - pip install -e .
 - pip install flake8 flake8-import-order pytest-cov coveralls
 script:
