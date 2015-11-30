@@ -38,7 +38,7 @@ import click
 
 
 __all__ = ['DefaultGroup']
-__version__ = '1.0.0'
+__version__ = '1.0'
 
 
 class DefaultGroup(click.Group):
