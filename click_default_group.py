@@ -36,6 +36,8 @@
         foo*
         bar
 
+      $ cli.py
+      foo
       $ cli.py foo
       foo
       $ cli.py bar
