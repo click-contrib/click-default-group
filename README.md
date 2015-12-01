@@ -1,7 +1,9 @@
 Click Default Group
 ===================
 
-A default group invokes a default subcommand if no subcommand passed.
+`DefaultGroup` is a sub class of [`click.Group`]
+(http://click.pocoo.org/6/api/#click.Group).  But it invokes a default
+subcommand instead of showing a help message when a subcommand is not passed.
 
 [![Build Status]
 (https://travis-ci.org/sublee/click-default-group.svg?branch=master)]
