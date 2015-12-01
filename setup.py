@@ -19,6 +19,7 @@ test.run_tests = run_tests
 setup(
     name='click-default-group',
     version=version,
+    license='BSD',
     author='Heungsub Lee',
     author_email='sub@subl.ee',
     platforms='any',
