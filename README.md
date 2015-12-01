@@ -3,6 +3,13 @@ Click Default Group
 
 A default group invokes a default subcommand if no subcommand passed.
 
+[![Build Status]
+(https://travis-ci.org/sublee/click-default-group.svg?branch=master)]
+(https://travis-ci.org/sublee/click-default-group)
+[![Coverage Status]
+(https://coveralls.io/repos/sublee/click-default-group/badge.svg?branch=master)]
+(https://coveralls.io/r/sublee/click-default-group)
+
 Usage
 -----
 
@@ -45,6 +52,22 @@ foo
 $ cli.py bar
 bar
 ```
+
+Compatibility
+-------------
+
+`click-default-group` is compatible with these Click versions:
+
+- Click-6.2
+- Click-6.1
+- Click-6.0
+- Click-5.1
+- Click-5.0
+- Click-4.1
+- Click-4.0
+
+See the [latest build status](https://travis-ci.org/sublee/click-default-group)
+at Travis CI.
 
 Licensing
 ---------
