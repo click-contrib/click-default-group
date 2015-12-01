@@ -1,5 +1,5 @@
-Default group for Click
-=======================
+Click Default Group
+===================
 
 A default group invokes a default subcommand if no subcommand passed.
 
@@ -45,3 +45,11 @@ foo
 $ cli.py bar
 bar
 ```
+
+Licensing
+---------
+
+Written by [Heungsub Lee], and distributed under the [BSD 3-Clause] license.
+
+[Heungsub Lee]: http://subl.ee/
+[BSD 3-Clause]: http://opensource.org/licenses/BSD-3-Clause
