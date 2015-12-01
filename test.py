@@ -71,5 +71,12 @@ def test_default_if_no_args():
     assert r.invoke(cli, []).output == '\n\n'
 
 
+def test_format_commands():
+    help = r.invoke(cli, ['--help']).output
+    assert 'foo*' in help
+    assert 'bar*' not in help
+    assert 'bar' in help
+
+
 if __name__ == '__main__':
     cli()
