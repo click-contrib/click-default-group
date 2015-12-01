@@ -10,7 +10,7 @@
       import click
       from click_default_group import DefaultGroup
 
-      @click.group(cls=DefaultGroup)
+      @click.group(cls=DefaultGroup, default_if_no_args=True)
       def cli():
           pass
 
@@ -38,16 +38,26 @@ import click
 
 
 __all__ = ['DefaultGroup']
-__version__ = '1.0'
+__version__ = '1.1'
 
 
 class DefaultGroup(click.Group):
+    """Invokes a subcommand marked with `default=True` if any subcommand not
+    chosen.
+
+    :param default_if_no_args: resolves to the default command if no arguments
+                               passed.
+
+    """
 
     def __init__(self, *args, **kwargs):
-        super(DefaultGroup, self).__init__(*args, **kwargs)
-        self.default_command_name = None
+        self.default_cmd_name = None
+        self.default_if_no_args = kwargs.pop('default_if_no_args', False)
         # To resolve as the default command.
+        if not kwargs.get('ignore_unknown_options', True):
+            raise ValueError('Default group accepts unknown options')
         self.ignore_unknown_options = True
+        super(DefaultGroup, self).__init__(*args, **kwargs)
 
     def command(self, *args, **kwargs):
         default = kwargs.pop('default', False)
@@ -58,23 +68,23 @@ class DefaultGroup(click.Group):
         def _decorator(f):
             cmd = decorator(f)
             if default:
-                if self.default_command_name is not None:
+                if self.default_cmd_name is not None:
                     del self.commands[cmd.name]
                     raise RuntimeError('Default command already defined')
-                self.default_command_name = cmd.name
+                self.default_cmd_name = cmd.name
             return cmd
         return _decorator
 
     def parse_args(self, ctx, args):
-        if not args:
-            args.insert(0, self.default_command_name)
+        if not args and self.default_if_no_args:
+            args.insert(0, self.default_cmd_name)
         return super(DefaultGroup, self).parse_args(ctx, args)
 
     def get_command(self, ctx, cmd_name):
         if cmd_name not in self.commands:
             # No command name matched.
             ctx.arg0 = cmd_name
-            cmd_name = self.default_command_name
+            cmd_name = self.default_cmd_name
         return super(DefaultGroup, self).get_command(ctx, cmd_name)
 
     def resolve_command(self, ctx, args):

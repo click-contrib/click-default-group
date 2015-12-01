@@ -33,10 +33,6 @@ def test_default_command_with_arguments():
     assert 'no such option' in r.invoke(cli, ['-x']).output
 
 
-def test_default_command_without_arguments():
-    assert r.invoke(cli, []).output == 'foo\n'
-
-
 def test_group_arguments():
     assert r.invoke(cli, ['--group-only']).output == '--group-only passed.\n'
 
@@ -53,6 +49,26 @@ def test_no_more_default_command():
 def test_explicit_command():
     assert r.invoke(cli, ['foo']).output == 'foo\n'
     assert r.invoke(cli, ['bar']).output == 'bar\n'
+
+
+def test_set_ignore_unknown_options_to_false():
+    with pytest.raises(ValueError):
+        DefaultGroup(ignore_unknown_options=False)
+
+
+def test_default_if_no_args():
+    cli = DefaultGroup()
+    @cli.command(default=True)
+    @click.argument('foo', required=False)
+    @click.option('--bar')
+    def foobar(foo, bar):
+        click.echo(foo)
+        click.echo(bar)
+    assert r.invoke(cli, []).output.startswith('Usage:')
+    assert r.invoke(cli, ['foo']).output == 'foo\n\n'
+    assert r.invoke(cli, ['foo', '--bar', 'bar']).output == 'foo\nbar\n'
+    cli.default_if_no_args = True
+    assert r.invoke(cli, []).output == '\n\n'
 
 
 if __name__ == '__main__':
