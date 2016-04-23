@@ -22,6 +22,7 @@ setup(
     license='BSD',
     author='Heungsub Lee',
     author_email='sub@subl.ee',
+    description='Extends click. Group to invoke a command without explicit subcommand name',
     platforms='any',
     py_modules=['click_default_group'],
     classifiers=[
