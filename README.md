@@ -6,11 +6,11 @@ Click Default Group
 subcommand instead of showing a help message when a subcommand is not passed.
 
 [![Build Status]
-(https://travis-ci.org/sublee/click-default-group.svg?branch=master)]
-(https://travis-ci.org/sublee/click-default-group)
+(https://travis-ci.org/click-contrib/click-default-group.svg?branch=master)]
+(https://travis-ci.org/click-contrib/click-default-group)
 [![Coverage Status]
-(https://coveralls.io/repos/sublee/click-default-group/badge.svg?branch=master)]
-(https://coveralls.io/r/sublee/click-default-group)
+(https://coveralls.io/repos/click-contrib/click-default-group/badge.svg?branch=master)]
+(https://coveralls.io/r/click-contrib/click-default-group)
 
 Usage
 -----
@@ -68,7 +68,7 @@ Compatibility
 - Click-4.1
 - Click-4.0
 
-See the [latest build status](https://travis-ci.org/sublee/click-default-group)
+See the [latest build status](https://travis-ci.org/click-contrib/click-default-group)
 at Travis CI.
 
 Licensing
