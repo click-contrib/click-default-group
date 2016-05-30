@@ -44,11 +44,13 @@
       bar
 
 """
+import warnings
+
 import click
 
 
 __all__ = ['DefaultGroup']
-__version__ = '1.1'
+__version__ = '1.2'
 
 
 class DefaultGroup(click.Group):
@@ -61,29 +63,19 @@ class DefaultGroup(click.Group):
     """
 
     def __init__(self, *args, **kwargs):
-        self.default_cmd_name = None
-        self.default_if_no_args = kwargs.pop('default_if_no_args', False)
         # To resolve as the default command.
         if not kwargs.get('ignore_unknown_options', True):
             raise ValueError('Default group accepts unknown options')
         self.ignore_unknown_options = True
+        self.default_cmd_name = kwargs.pop('default', None)
+        self.default_if_no_args = kwargs.pop('default_if_no_args', False)
         super(DefaultGroup, self).__init__(*args, **kwargs)
 
-    def command(self, *args, **kwargs):
-        default = kwargs.pop('default', False)
-        decorator = super(DefaultGroup, self).command(*args, **kwargs)
-        if not default:
-            # Customized feature not used.
-            return decorator
-        def _decorator(f):
-            cmd = decorator(f)
-            if default:
-                if self.default_cmd_name is not None:
-                    del self.commands[cmd.name]
-                    raise RuntimeError('Default command already defined')
-                self.default_cmd_name = cmd.name
-            return cmd
-        return _decorator
+    def set_default_command(self, command):
+        """Sets a command function as the default command."""
+        cmd_name = command.name
+        self.add_command(command)
+        self.default_cmd_name = cmd_name
 
     def parse_args(self, ctx, args):
         if not args and self.default_if_no_args:
@@ -107,6 +99,19 @@ class DefaultGroup(click.Group):
     def format_commands(self, ctx, formatter):
         formatter = DefaultCommandFormatter(self, formatter, mark='*')
         return super(DefaultGroup, self).format_commands(ctx, formatter)
+
+    def command(self, *args, **kwargs):
+        default = kwargs.pop('default', False)
+        decorator = super(DefaultGroup, self).command(*args, **kwargs)
+        if not default:
+            return decorator
+        warnings.warn('Use default param of DefaultGroup or '
+                      'set_default_command() instead', DeprecationWarning)
+        def _decorator(f):
+            cmd = decorator(f)
+            self.set_default_command(cmd)
+            return cmd
+        return _decorator
 
 
 class DefaultCommandFormatter(object):
