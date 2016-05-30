@@ -15,17 +15,17 @@ subcommand instead of showing a help message when a subcommand is not passed.
 Usage
 -----
 
-Define a default subcommand by `default=True`:
+Define a default subcommand by `default=NAME`:
 
 ```python
 import click
 from click_default_group import DefaultGroup
 
-@click.group(cls=DefaultGroup, default_if_no_args=True)
+@click.group(cls=DefaultGroup, default='foo', default_if_no_args=True)
 def cli():
     pass
 
-@cli.command(default=True)
+@cli.command()
 def foo():
     click.echo('foo')
 
