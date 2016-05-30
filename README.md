@@ -6,10 +6,10 @@ Click Default Group
 subcommand instead of showing a help message when a subcommand is not passed.
 
 [![Build Status]
-(https://travis-ci.org/click-contrib/click-default-group.svg?branch=master)]
+(https://img.shields.io/travis/click-contrib/click-default-group.svg)]
 (https://travis-ci.org/click-contrib/click-default-group)
 [![Coverage Status]
-(https://coveralls.io/repos/click-contrib/click-default-group/badge.svg?branch=master)]
+(https://img.shields.io/coveralls/click-contrib/click-default-group.svg)]
 (https://coveralls.io/r/click-contrib/click-default-group)
 
 Usage
