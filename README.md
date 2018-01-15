@@ -1,16 +1,11 @@
 Click Default Group
 ===================
 
-`DefaultGroup` is a sub class of [`click.Group`]
-(http://click.pocoo.org/6/api/#click.Group).  But it invokes a default
+`DefaultGroup` is a sub class of [`click.Group`](http://click.pocoo.org/6/api/#click.Group).  But it invokes a default
 subcommand instead of showing a help message when a subcommand is not passed.
 
-[![Build Status]
-(https://img.shields.io/travis/click-contrib/click-default-group.svg)]
-(https://travis-ci.org/click-contrib/click-default-group)
-[![Coverage Status]
-(https://img.shields.io/coveralls/click-contrib/click-default-group.svg)]
-(https://coveralls.io/r/click-contrib/click-default-group)
+[![Build Status](https://img.shields.io/travis/click-contrib/click-default-group.svg)](https://travis-ci.org/click-contrib/click-default-group)
+[![Coverage Status](https://img.shields.io/coveralls/click-contrib/click-default-group.svg)](https://coveralls.io/r/click-contrib/click-default-group)
 
 Usage
 -----
