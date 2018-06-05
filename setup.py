@@ -13,6 +13,8 @@ assert version
 # Use pytest instead.
 def run_tests(self):
     raise SystemExit(__import__('pytest').main(['-v']))
+
+
 test.run_tests = run_tests
 
 
