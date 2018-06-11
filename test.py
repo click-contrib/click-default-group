@@ -49,12 +49,14 @@ def test_set_ignore_unknown_options_to_false():
 
 def test_default_if_no_args():
     cli = DefaultGroup()
+
     @cli.command()
     @click.argument('foo', required=False)
     @click.option('--bar')
     def foobar(foo, bar):
         click.echo(foo)
         click.echo(bar)
+
     cli.set_default_command(foobar)
     assert r.invoke(cli, []).output.startswith('Usage:')
     assert r.invoke(cli, ['foo']).output == 'foo\n\n'
