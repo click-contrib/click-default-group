@@ -55,9 +55,8 @@ Compatibility
 
 `click-default-group` is compatible with these Click versions:
 
-- Click-6.2
-- Click-6.1
-- Click-6.0
+- Click-7.0
+- Click-6.x
 - Click-5.1
 - Click-5.0
 - Click-4.1

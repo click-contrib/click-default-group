@@ -1,14 +1,17 @@
+dist: xenial
 language: python
 sudo: false
 python:
-- 2.7
-- 3.3
-- 3.4
-- 3.5
-- 3.5-dev
+- "2.7"
+- "3.5"
+- "3.6"
+- "3.7"
+- "3.8-dev"
 - pypy
 - pypy3
 env:
+- CLICK_VERSION=7.0
+- CLICK_VERSION=6.7
 - CLICK_VERSION=6.6
 - CLICK_VERSION=6.4
 - CLICK_VERSION=6.3
