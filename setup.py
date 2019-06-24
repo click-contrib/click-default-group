@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 import re
 
 from setuptools import setup
@@ -8,6 +9,9 @@ from setuptools.command.test import test
 with open('click_default_group.py') as f:
     version = re.search(r'__version__\s*=\s*\'(.+?)\'', f.read()).group(1)
 assert version
+
+with open(os.path.join(os.path.dirname(__file__), 'README.md')) as f:
+    long_description = f.read()
 
 
 # Use pytest instead.
@@ -27,6 +31,8 @@ setup(
     description=('Extends click.Group to invoke a '
                  'command without explicit subcommand name'),
     url='https://github.com/sublee/click-default-group/',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     platforms='any',
     py_modules=['click_default_group'],
     classifiers=[
