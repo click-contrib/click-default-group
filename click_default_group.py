@@ -94,6 +94,7 @@ class DefaultGroup(click.Group):
         cmd_name, cmd, args = base.resolve_command(ctx, args)
         if hasattr(ctx, 'arg0'):
             args.insert(0, ctx.arg0)
+            cmd_name = cmd.name
         return cmd_name, cmd, args
 
     def format_commands(self, ctx, formatter):
