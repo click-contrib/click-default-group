@@ -50,7 +50,7 @@ import click
 
 
 __all__ = ['DefaultGroup']
-__version__ = '1.2.1'
+__version__ = '1.2.2'
 
 
 class DefaultGroup(click.Group):
