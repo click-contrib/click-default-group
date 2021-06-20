@@ -30,7 +30,7 @@ r = CliRunner()
 
 def test_default_command_with_arguments():
     assert r.invoke(cli, ['--foo', 'foooo']).output == 'foooo\n'
-    assert 'no such option' in r.invoke(cli, ['-x']).output
+    assert 'no such option' in r.invoke(cli, ['-x']).output.lower()
 
 
 def test_group_arguments():
