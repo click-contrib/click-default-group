@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-22.04
     environment:
       name: pypi
-      url: https://test.pypi.org/p/click-default-group
+      url: https://pypi.org/p/click-default-group
 
     permissions:
       id-token: write
@@ -63,5 +63,3 @@ jobs:
         name: dist
         path: dist/
     - uses: pypa/gh-action-pypi-publish@release/v1
-      with:
-        repository-url: https://test.pypi.org/legacy/
