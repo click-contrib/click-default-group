@@ -1,7 +1,7 @@
 Click Default Group
 ===================
 
-`DefaultGroup` is a sub class of [`click.Group`](http://click.pocoo.org/6/api/#click.Group).  But it invokes a default
+`DefaultGroup` is a sub class of [`click.Group`](https://click.pocoo.org/6/api/#click.Group).  But it invokes a default
 subcommand instead of showing a help message when a subcommand is not passed.
 
 [![Build Status](https://img.shields.io/travis/click-contrib/click-default-group.svg)](https://travis-ci.org/click-contrib/click-default-group)
@@ -70,5 +70,5 @@ Licensing
 
 Written by [Heungsub Lee], and distributed under the [BSD 3-Clause] license.
 
-[Heungsub Lee]: http://subl.ee/
-[BSD 3-Clause]: http://opensource.org/licenses/BSD-3-Clause
+[Heungsub Lee]: https://subl.ee/
+[BSD 3-Clause]: https://opensource.org/licenses/BSD-3-Clause

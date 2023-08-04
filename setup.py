@@ -27,10 +27,10 @@ setup(
     version=version,
     license='BSD',
     author='Heungsub Lee',
-    author_email='sub@subl.ee',
+    author_email='heungsub@subl.ee',
     description=('Extends click.Group to invoke a '
                  'command without explicit subcommand name'),
-    url='https://github.com/sublee/click-default-group/',
+    url='https://github.com/click-contrib/click-default-group/',
     long_description=long_description,
     long_description_content_type='text/markdown',
     platforms='any',
