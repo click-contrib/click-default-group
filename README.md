@@ -1,12 +1,12 @@
 Click Default Group
 ===================
 
+[![Test Status](https://github.com/click-contrib/click-default-group/actions/workflows/test.yaml/badge.svg)](https://github.com/click-contrib/click-default-group/actions/workflows/test.yaml)
+
 `DefaultGroup` is a subclass of
 [`click.Group`](https://click.pocoo.org/6/api/#click.Group).  But it invokes
 the default subcommand instead of showing a help message when a subcommand is
 not passed.
-
-[![Test Status](https://github.com/click-contrib/click-default-group/actions/workflows/test.yaml/badge.svg)]
 
 Usage
 -----
