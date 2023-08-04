@@ -1,14 +1,8 @@
-# -*- coding: utf-8 -*-
 import os
-import re
 
 from setuptools import setup
 from setuptools.command.test import test
 
-
-with open('click_default_group.py') as f:
-    version = re.search(r'__version__\s*=\s*\'(.+?)\'', f.read()).group(1)
-assert version
 
 with open(os.path.join(os.path.dirname(__file__), 'README.md')) as f:
     long_description = f.read()
@@ -24,7 +18,7 @@ test.run_tests = run_tests
 
 setup(
     name='click-default-group',
-    version=version,
+    version='1.2.3',
     license='BSD',
     author='Heungsub Lee',
     author_email='heungsub@subl.ee',
