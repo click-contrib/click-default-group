@@ -1,8 +1,10 @@
 Click Default Group
 ===================
 
-`DefaultGroup` is a sub class of [`click.Group`](https://click.pocoo.org/6/api/#click.Group).  But it invokes a default
-subcommand instead of showing a help message when a subcommand is not passed.
+`DefaultGroup` is a subclass of
+[`click.Group`](https://click.pocoo.org/6/api/#click.Group).  But it invokes
+the default subcommand instead of showing a help message when a subcommand is
+not passed.
 
 [![Test Status](https://github.com/click-contrib/click-default-group/actions/workflows/test.yaml/badge.svg)]
 
@@ -54,15 +56,11 @@ Compatibility
 
 `click-default-group` is compatible with these Click versions:
 
-- Click-7.0
+- Click-8.x
+- Click-7.x
 - Click-6.x
-- Click-5.1
-- Click-5.0
-- Click-4.1
-- Click-4.0
-
-See the [latest build status](https://travis-ci.org/click-contrib/click-default-group)
-at Travis CI.
+- Click-5.x
+- Click-4.x
 
 Licensing
 ---------
