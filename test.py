@@ -46,6 +46,10 @@ def test_explicit_command(cli_group_with_default: DefaultGroup):
     assert r.invoke(cli_group_with_default, ['foo']).output == 'foo exec\n'
     assert r.invoke(cli_group_with_default, ['bar']).output == 'bar exec\n'
 
+def test_default_command_with_arguments():
+    assert r.invoke(cli, ['--foo', 'foooo']).output == 'foooo\n'
+    assert 'no such option' in r.invoke(cli, ['-x']).output.lower()
+
 def test_default_if_no_args(cli_group_with_default: DefaultGroup):
     assert r.invoke(cli_group_with_default, []).output == 'foo exec\n'
 

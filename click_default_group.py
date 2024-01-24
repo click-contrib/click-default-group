@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
    click_default_group
    ~~~~~~~~~~~~~~~~~~~
@@ -50,7 +49,7 @@ import click
 
 
 __all__ = ['DefaultGroup']
-__version__ = '1.2.2'
+__version__ = '1.2.4'
 
 
 class DefaultGroup(click.Group):
