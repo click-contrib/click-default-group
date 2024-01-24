@@ -79,22 +79,36 @@ class DefaultGroup(click.Group):
     def parse_args(self, ctx, args):
         if not args and self.default_if_no_args:
             args.insert(0, self.default_cmd_name)
-        return super(DefaultGroup, self).parse_args(ctx, args)
 
-    def get_command(self, ctx, cmd_name):
-        if cmd_name not in self.commands:
-            # No command name matched.
-            ctx.arg0 = cmd_name
-            cmd_name = self.default_cmd_name
-        return super(DefaultGroup, self).get_command(ctx, cmd_name)
+        if ctx.resilient_parsing:
+            return super(DefaultGroup, self).parse_args(ctx, args)
 
-    def resolve_command(self, ctx, args):
-        base = super(DefaultGroup, self)
-        cmd_name, cmd, args = base.resolve_command(ctx, args)
-        if hasattr(ctx, 'arg0'):
-            args.insert(0, ctx.arg0)
-            cmd_name = cmd.name
-        return cmd_name, cmd, args
+        # fixup to allow help work for subcommands
+        test_ctx = self.make_context(ctx.info_name, ctx.args, resilient_parsing=True)
+        rest = super(DefaultGroup, self).parse_args(test_ctx, args[:])
+
+        help_options = self.get_help_option_names(ctx)
+        if help_options and self.add_help_option and rest and any(s in help_options for s in rest):
+            return super(DefaultGroup, self).parse_args(ctx, args)
+
+        save_allow_interspersed_args = ctx.allow_interspersed_args
+        ctx.allow_interspersed_args = True
+        rest = super(DefaultGroup, self).parse_args(ctx, args)
+        ctx.allow_interspersed_args = save_allow_interspersed_args
+
+        if not rest and (ctx.protected_args or ['a'])[0][:1].isalnum() and not self.default_if_no_args:
+            pass  # Don't inject default_cmd_name if no command or command-specific options passed
+        elif not ctx.protected_args:
+            ctx.protected_args = [self.default_cmd_name]
+        else:
+            cmd_name = ctx.protected_args[0]
+            cmd = self.get_command(ctx, cmd_name)
+            if cmd is None and ctx.token_normalize_func is not None:
+                cmd_name = ctx.token_normalize_func(cmd_name)
+                cmd = self.get_command(ctx, cmd_name)
+            if cmd is None:
+                ctx.protected_args.insert(0, self.default_cmd_name)
+        return rest
 
     def format_commands(self, ctx, formatter):
         formatter = DefaultCommandFormatter(self, formatter, mark='*')
