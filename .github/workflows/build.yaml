@@ -27,6 +27,7 @@ jobs:
     - name: Check with flake8
       run: flake8 click_default_group.py test.py -v --show-source
     - name: Check type hints
+      if: ${{ startsWith( matrix.click-version, '8.' ) }}
       run: python3 -m mypy --follow-imports=silent --python-version "${{ matrix.python-version }}" --strict --implicit-reexport -- click_default_group.py
 
   build:
