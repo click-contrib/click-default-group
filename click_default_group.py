@@ -107,12 +107,14 @@ class DefaultGroup(click.Group):
         return super().format_commands(ctx, new_formatter)
 
     @t.overload
-    def command(self, __func: t.Callable[..., t.Any]) -> click.core.Command: ...
+    def command(self, __func: t.Callable[..., t.Any]) -> click.core.Command:
+        ...
 
     @t.overload
     def command(
         self, *args: t.Any, **kwargs: t.Any
-    ) -> t.Callable[[t.Callable[..., t.Any]], click.core.Command]: ...
+    ) -> t.Callable[[t.Callable[..., t.Any]], click.core.Command]:
+        ...
 
     def command(
         self, *args: t.Any, **kwargs: t.Any
@@ -120,7 +122,9 @@ class DefaultGroup(click.Group):
         t.Callable[[t.Callable[..., t.Any]], click.core.Command], click.core.Command
     ]:
         default = kwargs.pop("default", False)
-        decorator: t.Callable[[t.Callable[..., t.Any]], click.core.Command] = super().command(*args, **kwargs)
+        decorator: t.Callable[[t.Callable[..., t.Any]], click.core.Command] = (
+            super().command(*args, **kwargs)
+        )
         if not default:
             return decorator
         warnings.warn(

@@ -33,4 +33,4 @@ dynamic = ["version", "description"]
 Source = "https://github.com/click-contrib/click-default-group"
 
 [project.optional-dependencies]
-test = ["pytest", "mypy"]
+test = ["pytest", "mypy", "flake8", "flake8-import-order", "pytest-cov", "coveralls"]
