@@ -123,8 +123,10 @@ class DefaultGroup(click.Group):
         decorator: t.Callable[[t.Callable[..., t.Any]], click.core.Command] = super().command(*args, **kwargs)
         if not default:
             return decorator
-        warnings.warn('Use default param of DefaultGroup or '
-                      'set_default_command() instead', DeprecationWarning)
+        warnings.warn(
+            "Use default param of DefaultGroup or set_default_command() instead",
+            DeprecationWarning,
+        )
 
         def _decorator(f: t.Callable[..., t.Any]) -> click.core.Command:
             cmd: click.core.Command = decorator(f)

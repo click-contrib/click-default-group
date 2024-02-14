@@ -20,10 +20,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install '.[test']
+        pip install '.[test]'
         pip install click==${{ matrix.click-version }}
     - name: Test with pytest
       run: pytest
+    - name: Check type hints
+      run: python3 -m mypy --follow-imports=silent --python-version "${{ matrix.python-version }}" --strict --implicit-reexport -- click_default_group.py
 
   build:
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
