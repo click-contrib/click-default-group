@@ -82,10 +82,14 @@ class DefaultGroup(click.Group):
         return super(DefaultGroup, self).parse_args(ctx, args)
 
     def get_command(self, ctx, cmd_name):
-        if cmd_name not in self.commands:
+        if (
+            not hasattr(ctx, 'default_command_completed')
+            and cmd_name not in self.commands
+        ):
             # No command name matched.
             ctx.arg0 = cmd_name
             cmd_name = self.default_cmd_name
+            ctx.default_command_completed = True
         return super(DefaultGroup, self).get_command(ctx, cmd_name)
 
     def resolve_command(self, ctx, args):
