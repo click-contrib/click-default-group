@@ -82,10 +82,15 @@ class DefaultGroup(click.Group):
         return super(DefaultGroup, self).parse_args(ctx, args)
 
     def get_command(self, ctx, cmd_name):
-        if cmd_name not in self.commands:
+        if (cmd_name not in self.commands and
+                not (self.chain and
+                     getattr(ctx, '_default_command_completed', False))):
             # No command name matched.
             ctx.arg0 = cmd_name
             cmd_name = self.default_cmd_name
+            if self.chain:
+                # An unconsumed token must not expand the default forever.
+                ctx._default_command_completed = True
         return super(DefaultGroup, self).get_command(ctx, cmd_name)
 
     def resolve_command(self, ctx, args):
@@ -93,6 +98,7 @@ class DefaultGroup(click.Group):
         cmd_name, cmd, args = base.resolve_command(ctx, args)
         if hasattr(ctx, 'arg0'):
             args.insert(0, ctx.arg0)
+            del ctx.arg0
             cmd_name = cmd.name
         return cmd_name, cmd, args
 

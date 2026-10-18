@@ -51,6 +51,9 @@ $ cli.py bar
 bar
 ```
 
+With `chain=True`, an implicit default command is resolved at most once per
+invocation. Additional commands in the chain must be named explicitly.
+
 Compatibility
 -------------
 

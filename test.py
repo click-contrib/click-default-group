@@ -78,5 +78,51 @@ def test_deprecation():
     pytest.deprecated_call(cli.command, default=True)
 
 
+def test_chain_unknown_command_terminates(monkeypatch):
+    @click.group(cls=DefaultGroup, default='foo', default_if_no_args=True,
+                 chain=True)
+    def chained():
+        pass
+
+    @chained.command()
+    def foo():
+        click.echo('foo')
+
+    resolve_command = chained.resolve_command
+    resolutions = [0]
+
+    def bounded_resolve(ctx, args):
+        resolutions[0] += 1
+        assert resolutions[0] < 10, 'Default command resolution did not progress'
+        return resolve_command(ctx, args)
+
+    monkeypatch.setattr(chained, 'resolve_command', bounded_resolve)
+    result = r.invoke(chained, ['unknown'])
+    assert result.exit_code == 2
+    assert 'no such command' in result.output.lower()
+    assert 'unknown' in result.output
+    assert resolutions[0] == 2
+
+
+def test_chain_default_argument_then_explicit_command():
+    @click.group(cls=DefaultGroup, default='foo', chain=True)
+    def chained():
+        pass
+
+    @chained.command()
+    @click.argument('value')
+    def foo(value):
+        click.echo(value)
+
+    @chained.command()
+    def bar():
+        click.echo('bar')
+
+    for _ in range(2):
+        result = r.invoke(chained, ['value', 'bar', 'bar'])
+        assert result.exit_code == 0, result.output
+        assert result.output == 'value\nbar\nbar\n'
+
+
 if __name__ == '__main__':
     cli()
